@@ -1,0 +1,36 @@
+clear, clc
+
+syms x a b;
+f=(a-2*x)*(b-2*x)*x;
+h=diff(f,x);
+fprintf('Postac ogolna dla danych a i b:')
+r= solve(h,x);
+x1= r(1)
+
+a= input('Podaj wartość a: ');
+b= input('Podaj wartość b: ');
+fprintf('Postac dokladna dla a = %d oraz b = %d :', a, b);
+f=(a-2*x)*(b-2*x)*x;
+h=diff(f,x);
+r= double(solve(h,x));
+x1= r(1)
+
+%Rysowanie
+figure, hold on
+axis([-1 a+1 -1 b+1], 'off', 'equal')
+rectangle('Position', [0 x1 a b-2*x1], 'Curvature', [0 0],...
+    'EdgeColor', 'none','FaceColor','black')
+rectangle('Position', [x1 0 a-2*x1 b], 'Curvature', [0 0],...
+    'EdgeColor', 'none','FaceColor','black')
+line([x1 a-x1], [x1 x1], 'Color', 'blue', 'LineWidth', 2)
+line([x1 a-x1], [b-x1 b-x1], 'Color', 'blue', 'LineWidth', 2)
+line([x1 x1], [b-x1 x1], 'Color', 'blue', 'LineWidth', 2)
+line([a-x1 a-x1], [b-x1 x1], 'Color', 'blue', 'LineWidth', 2)
+line([a 0], [0 0],'Color', 'black', 'LineStyle', '--')
+line([0 a], [b b],'Color', 'black', 'LineStyle', '--')
+line([0 0], [0 b],'Color', 'black', 'LineStyle', '--')
+line([a a], [b 0],'Color', 'black', 'LineStyle', '--')
+text(a/2, -0.9, num2str(a)) % ręcznie wstawiona wartość
+text(a+0.3, b/2, num2str(b)) % ręcznie wstawiona wartość
+text(a+0.2, 2, num2str(x1)) % ręcznie wstawiona wartość
+text(a-2, -0.9, num2str(x1)) % ręcznie wstawiona wartość
